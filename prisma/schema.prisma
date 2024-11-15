@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model usuarios {
+  id            Int       @id @default(autoincrement())
+  usuario       String    @unique(map: "usuarios_usuario_unique") @db.VarChar(60)
+  Correo        String    @unique(map: "usuarios_correo_unique") @db.VarChar(100)
+  Nombre        String    @db.VarChar(80)
+  Apell_paterno String    @db.VarChar(30)
+  Apell_materno String    @db.VarChar(30)
+  Contrasena    String    @db.VarChar(40)
+  Tipo_usuario  String    @db.VarChar(100)
+  Created_At    DateTime? @default(now()) @db.DateTime(0)
+  Updated_at    DateTime? @db.DateTime(0)
+}
